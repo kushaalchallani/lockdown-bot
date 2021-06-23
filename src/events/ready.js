@@ -1,16 +1,15 @@
-const Event = require('../struct/Event.js');
+const Event = require("../structures/bases/eventBase");
+const chalk = require("chalk");
 
-class ReadyEvent extends Event {
-  constructor() {
-    super({
-      id: 'ready',
-      once: true,
-    });
-  }
+module.exports = class extends Event {
+    constructor(...args) {
+        super(...args, {
+            name: "ready",
+            once: true,
+        });
+    }
 
-  exec() {
-    console.log('Yoo this is ready!');
-  }
-}
-
-module.exports = ReadyEvent;
+    async execute() {
+        console.log(chalk.cyan("[BOT] ") + this.client.user.tag + " is now online.");
+    }
+};
